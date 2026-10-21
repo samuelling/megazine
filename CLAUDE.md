@@ -43,7 +43,7 @@ Never guess `made`. Ask.
 ```
 
 - `image` is optional; it shows on the site's card (good for paintings). The paper is text-only.
-- A link with `"url": null` renders as a dashed "coming" button. The first link with a URL is where `?go=<id>` sends people.
+- A link with `"url": null` renders as a dashed "coming" button. The first link with a URL is where `?go=<id>` (the paper's code) sends people, unless the work has `"go": {"label": "...", "url": "..."}`, e.g. a page listing every streaming service for an album.
 - `"status": "workshop"` (and `"links": []`) lists it under **In the workshop**: mentioned, not out yet.
 - Credit kids' ideas with `"idea": "Name"` (first names only).
 

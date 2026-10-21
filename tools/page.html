@@ -333,7 +333,7 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
 
     // ?go=id : the paper's short link. Jump straight to the work if it has a live link.
     if (go && byId[go]) {
-      const live = (byId[go].links || []).find((l) => l.url);
+      const live = (byId[go].go && byId[go].go.url ? byId[go].go : null) || (byId[go].links || []).find((l) => l.url);
       if (live) { location.replace(live.url); return; }
     }
 

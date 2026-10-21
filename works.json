@@ -239,14 +239,26 @@
       "makers": [
         "Sam"
       ],
-      "platform": "Album by Thunderblitz · SoundCloud",
+      "platform": "Album by Thunderblitz · on every streaming service",
       "blurb": "The Thunderblitz album. No code, no prompts, just music.",
       "links": [
         {
-          "label": "Listen",
-          "url": "https://soundcloud.com/thunderblitz/sets/titanosaur"
+          "label": "Spotify",
+          "url": "https://open.spotify.com/album/45roAPSk2qNk2kuCWvYUdC"
+        },
+        {
+          "label": "Apple Music",
+          "url": "https://music.apple.com/us/album/titanosaur/1532517945"
+        },
+        {
+          "label": "Everywhere else",
+          "url": "https://distrokid.com/hyperfollow/thunderblitz/titanosaur"
         }
-      ]
+      ],
+      "go": {
+        "label": "Listen anywhere",
+        "url": "https://distrokid.com/hyperfollow/thunderblitz/titanosaur"
+      }
     },
     {
       "id": "solstice",

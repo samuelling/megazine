@@ -160,7 +160,8 @@ def work_block(c, wid, y_top, qr_size, big=False):
     url = f"{BASE}?go={wid}"
     live = [l for l in w["links"] if l.get("url")]
     pending = [l for l in w["links"] if not l.get("url")]
-    cta = [(live[0]["label"].upper() + " →", True)] if live else []
+    first = w.get("go") or (live[0] if live else None)  # where ?go=<id> lands
+    cta = [(first["label"].upper() + " →", True)] if first else []
     cta += [(f"{l['label']}: {l.get('status', 'soon')}", False) for l in pending]
 
     if big:
