@@ -82,13 +82,25 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-
   white-space: nowrap;
 }
 .logo .mis .lc { color: var(--pink); }
-.thesis {
-  max-width: 62ch;
-  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-  line-height: 1.5;
-  margin: 0;
+/* "what?" note: closed by default, the editors' own words inside */
+.what { margin: 2px 0 0; max-width: 64ch; }
+.what summary {
+  display: inline-flex; align-items: center; gap: 6px;
+  list-style: none; cursor: pointer;
+  font: 700 .82rem/1 var(--type); letter-spacing: .08em;
+  border: 1.5px solid var(--toner); padding: 7px 11px;
+  transform: rotate(-1deg);
 }
-.thesis b { font-weight: 600; }
+.what summary::-webkit-details-marker { display: none; }
+.what summary:hover { background: var(--toner); color: var(--paper); }
+.what[open] summary { background: var(--toner); color: var(--paper); }
+.what .note {
+  margin-top: 14px; padding: 16px 18px;
+  background: var(--sheet); border: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.what .note p { margin: 0; }
+.what .sig { font: 400 .85rem/1.4 var(--type); color: var(--muted); }
 
 /* Copy stamp (from the paper QR) */
 .stamp {
@@ -192,7 +204,16 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
 <header class="wrap mast">
   <div class="kicker"><span id="issue-line">Issue 01 · October 2026</span><span>Free · one sheet of paper · the rest is online</span></div>
   <h1 class="logo" aria-label="megaZINE"><span class="ink"><span class="lc">mega</span>ZINE</span><span class="mis" aria-hidden="true"><span class="lc">mega</span>ZINE</span></h1>
-  <p class="thesis">Everyone is talking about AI as a way to get rich or a way the world ends. <b>This is the stuff in between:</b> strange little apps, toys you can't explain, tools you might actually use, music, paintings and stories. Some made with Claude, some made by hand, most a bit of both.</p>
+  <details class="what" id="what">
+    <summary>what?</summary>
+    <div class="note">
+      <p>Matt and I have been using Claude to make all sorts of weird stuff. It feels like all the chatter about AI lately is either money-making ideas or end-of-the-world doom, and the areas in between seemed far less explored, or at least far less seen.</p>
+      <p>So we've been making strange little apps and demos. Some are immediately useless, some are actual tools you could use, and some are just performance pieces.</p>
+      <p>After hitting fever pitch on weird generative AI, we had the idea of a collective to bring these works together. Matt wanted a zine. I wanted a website collecting ideas and works: some made with an LLM, others just our own music or Matt's paintings. Sometimes people might just write stories. Anything goes.</p>
+      <p>So we merged them. The zine is literally a piece of paper with a QR code, and the code brings you here.</p>
+      <p class="sig">Sam (and Matt)</p>
+    </div>
+  </details>
   <div id="stamp" class="stamp" hidden></div>
 </header>
 

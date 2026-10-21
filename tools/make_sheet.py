@@ -201,13 +201,13 @@ def p_cover(c, copy, run):
 
 def p_intro(c, copy, run):
     y = H - PAD - 4
-    label(c, "WHAT THIS IS", PAD, y - 7, size=7.4)
-    y = para(c, "AI talk is mostly money or doom. <b>This is the stuff in between:</b> strange little apps, "
-                "toys, tools, music, paintings and stories. Some made with Claude, some by hand. "
-                "Every piece says which.", body, PAD, y - 16, W - 2 * PAD)
+    label(c, "WHAT?", PAD, y - 7, size=7.4)
+    y = para(c, "Matt and I have been using Claude to make weird stuff. AI chatter is all money-making or "
+                "doom; the space in between seemed far less seen. So: strange little apps, some useless, "
+                "some real tools, some performance pieces, plus our own music and paintings. "
+                "<i>Sam (and Matt)</i>", body, PAD, y - 16, W - 2 * PAD)
     label(c, "HOW TO READ IT", PAD, y - 16, size=7.4)
-    y = para(c, "Point your phone camera at a code. The links live online, so they keep working "
-                "after this paper is old.", body, PAD, y - 25, W - 2 * PAD)
+    y = para(c, "Point your phone at a code. The links live online, so they outlast this paper.", body, PAD, y - 25, W - 2 * PAD)
     c.setDash(2, 2)
     c.setLineWidth(0.6)
     c.line(PAD, y - 10, W - PAD, y - 10)
