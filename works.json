@@ -1,0 +1,188 @@
+{
+  "zine": {
+    "name": "megaZINE",
+    "tagline": "Between money and doom",
+    "editors": ["Sam", "Matt"],
+    "base_url": "https://samuelling.github.io/megazine/",
+    "print_run": 50
+  },
+  "issues": [
+    {
+      "id": "01",
+      "date": "October 2026",
+      "theme": "Between money and doom",
+      "works": ["ambit", "townies", "demovoyager", "septic-tankz", "solstice", "topple-house", "brick-ninja", "bell-weather", "decay-envelope"]
+    }
+  ],
+  "works": [
+    {
+      "id": "ambit",
+      "title": "Ambit: Quartet",
+      "kind": "sound",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "iPhone",
+      "blurb": "Four ambient instruments in one iPhone app, each listening to a different invisible field around you. Aether Wave plays the Bluetooth radio in the room, Bellweathered drones the weather, Leitmotif turns your phone's own data traffic into a melody, and Orbitakt drums the satellites passing overhead. A pad on the home screen leans the mix toward one voice.",
+      "links": [
+        { "label": "App Store", "url": null, "status": "In review" },
+        { "label": "How Aether listens", "url": "https://samuelling.github.io/Aether/" }
+      ]
+    },
+    {
+      "id": "townies",
+      "title": "(Water) Townies",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web · iPhone · iPad",
+      "blurb": "A city sim of the real Watertown, MA, built to scale from assessor records, with scenarios lifted from local news comment sections and a real traffic model under the hood. Ask any problem \"Why?\" and it shows you the chain of causes.",
+      "links": [
+        { "label": "Play in browser", "url": "https://samuelling.github.io/Townies/" },
+        { "label": "TestFlight", "url": null, "status": "Beta link soon" }
+      ]
+    },
+    {
+      "id": "demovoyager",
+      "title": "DemoVoyager",
+      "kind": "art",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A DOS prompt runs DEMOSEED.EXE and a new 1990s demoscene production appears: a tracker tune and pseudo-3D visuals, generated on your machine, in under 40K.",
+      "links": [{ "label": "Run DEMOSEED.EXE", "url": "https://samuelling.github.io/DemoVoyager/" }]
+    },
+    {
+      "id": "septic-tankz",
+      "title": "The Septic Tankz",
+      "kind": "toy",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A dial-up BBS that takes one caller at a time unless the sysop adds phone lines. ASCII art, a text adventure, upload/download ratios, and rumors of a secret login.",
+      "links": [{ "label": "Dial in", "url": "https://samuelling.github.io/BBS/" }]
+    },
+    {
+      "id": "solstice",
+      "title": "Solstice",
+      "kind": "tool",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "Photograph a headstone at Mount Auburn Cemetery and it works out who is buried there, then lays out what the records actually say. Sourced facts stay apart from guesses.",
+      "links": [{ "label": "Open", "url": "https://samuelling.github.io/Solstice/" }]
+    },
+    {
+      "id": "topple-house",
+      "title": "Topple House",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "Dominoes, where the levels are rooms of a house: bedroom, kitchen, hallway, stairs. Place them anywhere, preview the fall, then knock it down.",
+      "links": [{ "label": "Play", "url": "https://samuelling.github.io/Topple-House/" }]
+    },
+    {
+      "id": "brick-ninja",
+      "title": "Brick Ninja",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "idea": "Everett, with secret doors by Maya",
+      "platform": "Web",
+      "blurb": "A side-scrolling ninja made of bricks. Ninja stars, double jumps, and hidden doors into first-person bonus rooms where the overpowered weapons live.",
+      "links": [{ "label": "Play", "url": "https://samuelling.github.io/Brick-Ninja/" }]
+    },
+    {
+      "id": "bell-weather",
+      "title": "Bell Weather",
+      "kind": "sound",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A drone-and-bell machine played by today's weather and the hour where you are. It started life as a script for a monome norns.",
+      "links": [{ "label": "Listen", "url": "https://samuelling.github.io/Bell-weathered/" }]
+    },
+    {
+      "id": "decay-envelope",
+      "title": "Decay Envelope",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A puzzle adventure set inside a eurorack synthesizer. A depressed old man, a world of terminally online people, and a lot of patch cables.",
+      "links": [{ "label": "Play", "url": "https://samuelling.github.io/Decay-Envelope/" }]
+    },
+    {
+      "id": "big-apple-sam",
+      "title": "Big Apple Sam",
+      "kind": "toy",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "The old Starry Night screensaver, rebuilt. Zoom into any lit window and someone is living their life in there.",
+      "links": [{ "label": "Look out the window", "url": null, "status": "Soon" }]
+    },
+    {
+      "id": "toilet-goalie",
+      "title": "Toilet Goalie",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "idea": "Everett",
+      "platform": "Phone browser",
+      "blurb": "The goalie is a toilet. Flick the ball to shoot. It fights back.",
+      "links": [{ "label": "Play", "url": "https://samuelling.github.io/toilet-goalie/" }]
+    },
+    {
+      "id": "animal-sanctuary",
+      "title": "Animal Sanctuary",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "idea": "Maya",
+      "platform": "Web",
+      "blurb": "Find glowing foxes and small dragons in a magical world, bring them home, and grow them a sanctuary.",
+      "links": [{ "label": "Play", "url": "https://samuelling.github.io/Animal-Sanctuary/" }]
+    },
+    {
+      "id": "crush-commando",
+      "title": "Crush Commando",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A shooter about destroying your own sadness, and what you turn into once it's gone.",
+      "links": [{ "label": "Play", "url": "https://samuelling.github.io/crush-commando/" }]
+    },
+    {
+      "id": "mind-arcade",
+      "title": "Mind Arcade",
+      "kind": "tool",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A neuropsych test battery disguised as arcade games. It picks the next game based on how sure it is about you so far.",
+      "links": [{ "label": "Play", "url": "https://samuelling.github.io/Mind-Arcade/" }]
+    },
+    {
+      "id": "the-palace",
+      "title": "The Palace",
+      "kind": "game",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A haunted-mansion survival game whose puzzles quietly measure spatial memory while you try to save the man who let the ghouls in.",
+      "links": [{ "label": "Enter", "url": "https://samuelling.github.io/the-palace/" }]
+    },
+    {
+      "id": "mise-en-place",
+      "title": "Mise en Place",
+      "kind": "tool",
+      "made": "both",
+      "makers": ["Sam"],
+      "platform": "Web",
+      "blurb": "A frantic kitchen game that estimates your attentional capacity from how you juggle the orders.",
+      "links": [{ "label": "Cook", "url": "https://samuelling.github.io/Mise-en-Place/" }]
+    }
+  ]
+}
