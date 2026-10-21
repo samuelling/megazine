@@ -215,14 +215,17 @@ def p_cover(c, copy, run):
             c.arc(cx - rr, cy - rr, cx + rr, cy + rr, a0, rnd.uniform(70, 160))
     c.restoreState()
     # masthead
-    c.setFont("Sans-Bold", 22)
-    c.drawString(PAD, H - PAD - 24, "mega")
-    c.setFont("Sans-Bold", 64)
+    big = 64
+    while c.stringWidth("MEGA", "Sans-Bold", big) > W - 2 * PAD:
+        big -= 1
+    c.setFont("Sans-Bold", big)
     c.saveState()
     c.setFillColor(LIGHT)
-    c.drawString(PAD + 2.2, H - PAD - 80, "ZINE")  # misregistered second pass
+    c.drawString(PAD + 2.2, H - PAD - 58, "MEGA")  # misregistered second pass
     c.restoreState()
-    c.drawString(PAD, H - PAD - 78, "ZINE")
+    c.drawString(PAD, H - PAD - 56, "MEGA")
+    c.setFont("Sans-Bold", 22)
+    c.drawRightString(W - PAD, H - PAD - 80, "zine")
     c.setLineWidth(2)
     c.line(PAD, H - PAD - 90, W - PAD, H - PAD - 90)
     label(c, f"ISSUE {ISSUE['id']}", PAD, H - PAD - 104, size=8)
