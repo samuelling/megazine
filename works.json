@@ -26,7 +26,8 @@
         "brick-ninja",
         "toilet-goalie",
         "bell-weather",
-        "titanosaur"
+        "titanosaur",
+        "dialupsoundz"
       ]
     }
   ],
@@ -242,6 +243,28 @@
         "label": "Listen anywhere",
         "url": "https://distrokid.com/hyperfollow/thunderblitz/titanosaur"
       }
+    },
+    {
+      "id": "dialupsoundz",
+      "title": "DialUpSoundz",
+      "kind": "tool",
+      "made": "both",
+      "makers": [
+        "Matt"
+      ],
+      "platform": "iPhone · needs Apple Music",
+      "blurb": "Paste a chat assistant's playlist and it lands in Apple Music. It picks original studio versions over live and karaoke ones. A one-time unlock adds ratings, tags, liner notes and listening history, all kept on your phone, and its Operator lets your chat assistant recommend from your actual taste.",
+      "links": [
+        {
+          "label": "About the app",
+          "url": "https://tunedecho.com/apps/DialUpSoundz/"
+        },
+        {
+          "label": "App Store",
+          "url": null,
+          "status": "In beta"
+        }
+      ]
     },
     {
       "id": "topple-house",
