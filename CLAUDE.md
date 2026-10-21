@@ -61,6 +61,11 @@ python3 tools/make_sheet.py            # only if the current issue's lineup or t
 
 `make_sheet.py` prints a warning if a page overflows; shorten the first sentence of that work's blurb rather than shrinking type. Then commit with a plain message saying what changed and push to `main`; Pages redeploys in about a minute.
 
+## Site behaviour worth knowing
+
+- The current issue's cards are shuffled on every visit; the order in `issues[-1].works` only matters for the paper.
+- Visits, paper scans (`/scan/<id>`, `/scan/copy-<n>`) and clicks out (`/click/<id>`) are counted in GoatCounter under the code in `zine.goatcounter`. Don't add other trackers or cookies.
+
 ## Voice
 
 Plain, dry, short. No hype, no "revolutionary". Blurbs describe what the thing does, in present tense, as a person would tell a friend.

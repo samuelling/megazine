@@ -58,6 +58,21 @@ To feature it in an issue, add its `id` to that issue's `works` list (the paper 
 - `/?copy=37` shows "You're holding copy 37 of 50" plus a starting point picked from the issue by copy number.
 - `/?w=townies` scrolls to and highlights a card.
 
+## Visitor stats
+
+Counts go to [GoatCounter](https://www.goatcounter.com) (free for non-commercial sites, no cookies, no banner needed), only from the live site.
+
+**Set up once:** sign up at goatcounter.com/signup and choose the site code `megazine` (it's set as `zine.goatcounter` in `works.json`; if you pick another code, change it there). Then in GoatCounter's settings, add Matt as a user, and optionally make the dashboard public.
+
+**Dashboard:** `https://megazine.goatcounter.com`
+
+| Path | Means |
+| --- | --- |
+| `/` | A visit to the site. |
+| `/scan/<id>` | Someone scanned that work's code on the paper. |
+| `/scan/copy-<n>` | Someone scanned the back cover of copy *n*. |
+| `/click/<id>` | Someone clicked out to that work from the site. |
+
 ## Make the paper
 
 ```

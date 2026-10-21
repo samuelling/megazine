@@ -336,14 +336,38 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
     return bits.length ? `<p class="credit">${bits.join(" · ")}</p>` : "";
   }
 
+  // Visitor counts go to GoatCounter (no cookies), only from the real site.
+  let GC = null;
+  function track(path, title, event) {
+    if (!GC || !/\.github\.io$/.test(location.hostname)) return;
+    const q = new URLSearchParams({
+      p: path, t: title || document.title, r: event ? "" : document.referrer,
+      s: [screen.width, screen.height, devicePixelRatio || 1].join(","), rnd: Math.random().toString(36).slice(2),
+    });
+    if (event) q.set("e", "true");
+    const url = `https://${GC}.goatcounter.com/count?${q}`;
+    try { if (navigator.sendBeacon && navigator.sendBeacon(url)) return; } catch (e) {}
+    new Image().src = url;
+  }
+
+  function shuffled(a) {
+    const b = a.slice();
+    for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; }
+    return b;
+  }
+
   function render(data) {
     const byId = Object.fromEntries(data.works.map((w) => [w.id, w]));
+    GC = (data.zine && data.zine.goatcounter) || null;
 
-    // ?go=id : the paper's short link. Jump straight to the work if it has a live link.
+    // ?go=id : the paper's short link. Count the scan, then jump straight to the work if it has a live link.
     if (go && byId[go]) {
+      track(`/scan/${go}`, `Scan: ${byId[go].title}`, true);
       const live = (byId[go].go && byId[go].go.url ? byId[go].go : null) || (byId[go].links || []).find((l) => l.url);
       if (live) { location.replace(live.url); return; }
     }
+    if (copy) track(`/scan/copy-${parseInt(copy, 10)}`, "Scan: back cover", true);
+    track("/", document.title, false);
 
     const issue = data.issues[data.issues.length - 1];
     $("issue-line").textContent = `Issue ${issue.id} · ${issue.date}`;
@@ -377,8 +401,10 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
       drawBoard();
     });
 
+    // A fresh order on every visit, so nothing is permanently first or last.
+    const order = shuffled(inIssue);
     function drawBoard() {
-      const list = inIssue.filter((w) => active === "all" || w.kind === active);
+      const list = order.filter((w) => active === "all" || w.kind === active);
       $("board").innerHTML = list.map((w, i) => {
         const tilt = [-.7, .5, -.3, .8, -.5, .3][i % 6];
         const tape = [-4, 3, -2, 5, -3, 2][i % 6];
@@ -404,6 +430,15 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
         <p class="d">${esc(w.blurb)}${creditHTML(w, true).replace("<p", "<span").replace("</p>", "</span>")}</p>
         <span class="l">${(w.links || []).map((l) => linkHTML(l, false)).join("")}</span>
       </li>`).join("");
+
+    // Count clicks out to each work.
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a.btn, .stamp a");
+      if (!a) return;
+      const card = a.closest("[id]");
+      const id = card && byId[card.id] ? card.id : "copy-start";
+      track(`/click/${id}`, `Click: ${(byId[id] || {}).title || "copy start"} · ${a.textContent.replace(" ↗", "").trim()}`, true);
+    });
 
     if (focusId) {
       const el = document.getElementById(focusId);
