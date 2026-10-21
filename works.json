@@ -21,7 +21,6 @@
         "orders-of-magnitude",
         "septic-tankz",
         "animal-sanctuary",
-        "topple-house",
         "decay-envelope",
         "brick-ninja",
         "toilet-goalie",
@@ -145,23 +144,6 @@
       ]
     },
     {
-      "id": "topple-house",
-      "title": "Topple House",
-      "kind": "game",
-      "made": "both",
-      "makers": [
-        "Sam"
-      ],
-      "platform": "Web",
-      "blurb": "Dominoes, where the levels are rooms of a house: bedroom, kitchen, hallway, stairs. Place them anywhere, preview the fall, then knock it down.",
-      "links": [
-        {
-          "label": "Play",
-          "url": "https://samuelling.github.io/Topple-House/"
-        }
-      ]
-    },
-    {
       "id": "decay-envelope",
       "title": "Decay Envelope",
       "kind": "game",
@@ -259,6 +241,19 @@
         "label": "Listen anywhere",
         "url": "https://distrokid.com/hyperfollow/thunderblitz/titanosaur"
       }
+    },
+    {
+      "id": "topple-house",
+      "title": "Topple House",
+      "kind": "game",
+      "made": "both",
+      "makers": [
+        "Sam"
+      ],
+      "platform": "Web",
+      "blurb": "Dominoes, where the levels are rooms of a house: bedroom, kitchen, hallway, stairs. Place them anywhere, preview the fall, then knock it down.",
+      "links": [],
+      "status": "workshop"
     },
     {
       "id": "solstice",
