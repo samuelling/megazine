@@ -299,7 +299,8 @@ def p_back(c, copy, run):
         y = work_block(c, extra, y - 20, 0.7 * inch)
     else:
         y = para(c, "Want to put something in the next one? An app, a song, a painting, a story. "
-                    "Find Sam or Matt, or open the site and read the last section.", small,
+                    "Dial The Septic Tankz BBS, get validated, and post in megaZINE Submissions. "
+                    "The site has the number.", small,
                  PAD, yq - 32, W - 2 * PAD)
     if y < PAD + 26 and not copy:
         print(f"warning: page 8 overflows by {PAD + 26 - y:.0f}pt")

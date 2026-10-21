@@ -201,6 +201,8 @@ main { overflow-x: clip; }
 .submit { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px 32px; padding-block: 10px 30px; }
 .submit h3 { font: 700 .8rem/1 var(--type); letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin: 0 0 8px; }
 .submit p { margin: 0; max-width: 46ch; }
+.submit .steps { margin: 10px 0 14px; padding-left: 1.4em; display: grid; gap: 4px; max-width: 46ch; }
+.submit .steps li::marker { font: 700 .85em var(--type); color: var(--blue); }
 .legend { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 12px; }
 footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400 .85rem/1.5 var(--type); color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 .err { font: 400 .95rem/1.5 var(--type); color: var(--muted); padding-block: 20px; }
@@ -262,8 +264,14 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
     <div class="sect"><h2 id="submit-h">Put something in</h2></div>
     <div class="submit">
       <div>
-        <h3>Anything goes</h3>
-        <p>An app that does nothing useful. A tool that does one thing well. A song, a painting, a short story, a screensaver. Send it to Sam or Matt and it may end up in the next sheet.</p>
+        <h3>Anything goes, through the BBS</h3>
+        <p>An app that does nothing useful. A tool that does one thing well. A song, a painting, a short story. Submissions go through The Septic Tankz, our dial-up board:</p>
+        <ol class="steps">
+          <li>Dial in and make an account.</li>
+          <li>Wait for the SysOp to validate you.</li>
+          <li>Post in <b>megaZINE Submissions</b>, following the first message there.</li>
+        </ol>
+        <p><a class="btn primary" href="https://samuelling.github.io/BBS/" target="_blank" rel="noopener">Dial in ↗</a></p>
       </div>
       <div>
         <h3>Get your seal</h3>

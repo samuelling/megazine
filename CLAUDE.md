@@ -61,6 +61,10 @@ python3 tools/make_sheet.py            # only if the current issue's lineup or t
 
 `make_sheet.py` prints a warning if a page overflows; shorten the first sentence of that work's blurb rather than shrinking type. Then commit with a plain message saying what changed and push to `main`; Pages redeploys in about a minute.
 
+## Outside submissions
+
+People other than the editors submit through the BBS (repo `samuelling/BBS`, The Septic Tankz): they make an account, the SysOp (Sam) validates them, and they post in the **megaZINE Submissions** message base using the template in its first post (title, what, link, how it was made, seal name). The SysOp gets a Slack/Telegram ping for each one. When an editor accepts one, add it to `works.json` with the submitter's seal name in `makers`, and tell them by board e-mail. Don't take submissions any other way.
+
 ## Site behaviour worth knowing
 
 - The current issue's cards are shuffled on every visit; the order in `issues[-1].works` only matters for the paper.

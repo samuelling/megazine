@@ -54,6 +54,10 @@ A link with `"url": null` shows as a dashed "coming" button. Fill the URL in lat
 
 To feature it in an issue, add its `id` to that issue's `works` list (the paper fits 12). Workshop items show up under **In the workshop**.
 
+## Outside submissions
+
+Anyone else submits through The Septic Tankz BBS (`samuelling.github.io/BBS`): make an account, wait for the SysOp to validate it, then post in the **megaZINE Submissions** base using the template in its first post. The SysOp is pinged for each submission. Accepted pieces go into `works.json` with the submitter's name on the seal.
+
 ## Links the site understands
 
 - `/?go=townies` jumps straight to that work's first live link (this is what the paper codes use). If the work has no live link yet, it shows its card instead.
