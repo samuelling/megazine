@@ -21,6 +21,8 @@ Then just talk normally, e.g.:
 
 Claude will ask if you don't say: how it was made (by hand, by Claude, or both) and where it lives (a link, or a photo for paintings).
 
+Descriptions stay oblique about influences: no names of other people's games, films, brands or characters, and no borrowed artwork. Claude will reword if you mention them.
+
 ## How the site works
 
 - **The issue** is the current lineup. Its cards appear in a new random order on every visit, so nobody's piece is always first.

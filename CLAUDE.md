@@ -73,3 +73,7 @@ python3 tools/make_sheet.py            # only if the current issue's lineup or t
 ## Voice
 
 Plain, dry, short. No hype, no "revolutionary". Blurbs describe what the thing does, in present tense, as a person would tell a friend.
+
+## Other people's names stay off the page
+
+Be oblique about anything a piece borrows from. Blurbs, titles, seals, images and the paper never name or depict other people's games, characters, films, songs, screensavers, brands or products as inspiration ("like X", "a remake of Y", "X-style"). Describe what our piece does instead: "a night skyline from an old screensaver", not the screensaver's name; "a city builder", not the game it echoes. No logos, screenshots or artwork from other works. Naming a platform or store something runs on or is sold through (iPhone, App Store, Spotify) is fine.

@@ -46,6 +46,8 @@ Add an entry to `works` in `works.json`:
 }
 ```
 
+Keep blurbs oblique about influences: don't name other people's games, films, brands or characters, and don't use their artwork (see `CLAUDE.md`).
+
 A link with `"url": null` shows as a dashed "coming" button. Fill the URL in later and every printed code for it starts working, no reprint needed.
 
 `makers` and `made` print the gold seal: "MADE BY MATT · BY HAND". `image` is optional (paintings). Add `"status": "workshop"` with no links to list something as still being built.
