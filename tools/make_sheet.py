@@ -49,7 +49,7 @@ PAD = 0.24 * inch
 GREY = Color(0, 0, 0, alpha=0.55)
 LIGHT = Color(0, 0, 0, alpha=0.18)
 
-KIND = {"game": "GAME", "sound": "SOUND", "tool": "TOOL", "toy": "TOY", "art": "ART", "story": "STORY"}
+KIND = {"music": "MUSIC", "game": "GAME", "sound": "SOUND", "tool": "TOOL", "toy": "TOY", "art": "ART", "story": "STORY"}
 MADE = {"hands": "MADE BY HAND", "claude": "MADE BY CLAUDE", "both": "HANDS + CLAUDE"}
 
 body = ParagraphStyle("body", fontName="Sans", fontSize=8.6, leading=11.2, alignment=TA_LEFT)
@@ -88,6 +88,7 @@ def label(c, text, x, y, size=6.6, font="Mono-Bold", spacing=1.1):
 
 
 def stamp(c, text, x_right, y, size=6.2):
+    """Boxed rubber stamp (used for the copy number on the cover)."""
     c.saveState()
     c.setFont("Mono-Bold", size)
     tw = c.stringWidth(text, "Mono-Bold", size) + 0.4 * len(text)
@@ -101,6 +102,40 @@ def stamp(c, text, x_right, y, size=6.2):
     t.textLine(text)
     t.setCharSpace(0)
     c.drawText(t)
+    c.restoreState()
+
+
+SEAL_HOW = {"hands": "BY HAND", "claude": "BY CLAUDE", "both": "HANDS + CLAUDE"}
+
+
+def seal(c, w, cx, cy, r=21, rot=8):
+    """Photocopier version of the gold seal: starburst, maker in the middle, how it was made underneath."""
+    who = (w.get("seal") or " & ".join(w.get("makers") or ["?"])).upper()
+    how = SEAL_HOW.get(w.get("made"), str(w.get("made", "")).upper())
+    c.saveState()
+    c.translate(cx, cy)
+    c.rotate(rot)
+    n = 30
+    p = c.beginPath()
+    for k in range(n * 2):
+        rr = r if k % 2 == 0 else r * 0.9
+        a = math.pi * k / n
+        x, y = rr * math.sin(a), rr * math.cos(a)
+        p.moveTo(x, y) if k == 0 else p.lineTo(x, y)
+    p.close()
+    c.setFillColor(Color(0, 0, 0, alpha=0.12))
+    c.setLineWidth(0.7)
+    c.drawPath(p, stroke=1, fill=1)
+    c.setFillColor(white)
+    c.circle(0, 0, r * 0.74, stroke=1, fill=1)
+    c.setFillColor(black)
+    c.setFont("Mono-Bold", 3.6)
+    c.drawCentredString(0, r * 0.38, "MADE BY")
+    fs = 9 if len(who) <= 4 else 7 if len(who) <= 7 else 5.2
+    c.setFont("Sans-Bold", fs)
+    c.drawCentredString(0, -fs * 0.35, who)
+    c.setFont("Mono-Bold", 3.1 if len(how) > 9 else 3.6)
+    c.drawCentredString(0, -r * 0.52, how)
     c.restoreState()
 
 
@@ -120,8 +155,8 @@ def work_block(c, wid, y_top, qr_size, big=False):
     w = WORKS[wid]
     x, cw = PAD, W - 2 * PAD
     label(c, KIND.get(w["kind"], w["kind"].upper()), x, y_top - 7)
-    stamp(c, MADE.get(w["made"], w["made"].upper()), W - PAD, y_top - 7)
-    y = para(c, w["title"], title if big else title_s, x, y_top - 14, cw)
+    seal(c, w, W - PAD - 19, y_top - 20, rot=(sum(map(ord, wid)) % 21) - 10)
+    y = para(c, w["title"], title if big else title_s, x, y_top - 14, cw - 44)
     url = f"{BASE}?go={wid}"
     live = [l for l in w["links"] if l.get("url")]
     pending = [l for l in w["links"] if not l.get("url")]
@@ -145,7 +180,8 @@ def work_block(c, wid, y_top, qr_size, big=False):
 
     tw = cw - qr_size - 8
     top = y - 4
-    c.drawImage(qr_img(url), x + cw - qr_size, top - qr_size, qr_size, qr_size)
+    qtop = min(top, y_top - 44)  # keep the code clear of the seal
+    c.drawImage(qr_img(url), x + cw - qr_size, qtop - qr_size, qr_size, qr_size)
     ty = top
     if w.get("platform"):
         ty = para(c, w["platform"], type_, x, ty, tw) - 3
@@ -159,7 +195,7 @@ def work_block(c, wid, y_top, qr_size, big=False):
             text = text.rsplit(" ", 1)[0]
         c.setFont(font, 6.8)
         c.drawString(x, ty, text)
-    return min(ty - 3, top - qr_size)
+    return min(ty - 3, qtop - qr_size)
 
 
 # ---------------------------------------------------------------- panels
@@ -206,13 +242,14 @@ def p_intro(c, copy, run):
                 "doom; the space in between seemed far less seen. So: strange little apps, some useless, "
                 "some real tools, some performance pieces, plus our own music and paintings. "
                 "<i>Sam (and Matt)</i>", body, PAD, y - 16, W - 2 * PAD)
-    label(c, "HOW TO READ IT", PAD, y - 16, size=7.4)
-    y = para(c, "Point your phone at a code. The links live online, so they outlast this paper.", body, PAD, y - 25, W - 2 * PAD)
+    label(c, "HOW TO READ IT", PAD, y - 14, size=7.4)
+    y = para(c, "Point your phone at a code. The links live online, so they outlast this paper.", body, PAD, y - 22, W - 2 * PAD)
     c.setDash(2, 2)
     c.setLineWidth(0.6)
     c.line(PAD, y - 10, W - PAD, y - 10)
     c.setDash()
-    y = work_block(c, "decay-envelope", y - 20, 0.7 * inch)
+    if len(ISSUE["works"]) > 10:
+        y = work_block(c, ISSUE["works"][10], y - 16, 0.62 * inch)
     if y < PAD + 10 and not copy:
         print(f"warning: page 2 overflows by {PAD + 10 - y:.0f}pt")
     folio(c, 2)
@@ -238,32 +275,42 @@ def p_works(ids, n, big=False, qr=None):
 
 def p_back(c, copy, run):
     url = BASE + (f"?copy={copy}" if copy else "")
-    s = W - 2 * PAD - 0.3 * inch
+    extra = ISSUE["works"][11] if len(ISSUE["works"]) > 11 else None
+    s = 1.3 * inch if extra else W - 2 * PAD - 0.3 * inch
     label(c, "THE REST LIVES HERE", PAD, H - PAD - 8, size=8)
     yq = H - PAD - 18 - s
-    c.drawImage(qr_img(url), PAD + 0.15 * inch, yq, s, s)
+    c.drawImage(qr_img(url), (W - s) / 2, yq, s, s)
     c.setFont("Mono-Bold", 7.2)
     c.drawCentredString(W / 2, yq - 12, BASE.replace("https://", "").rstrip("/"))
+    y = yq - 12
     if copy:
         c.setFont("Mono", 6.6)
         c.drawCentredString(W / 2, yq - 22, f"this code knows you hold copy {copy}")
-    y = para(c, "Want to put something in the next one? An app, a song, a painting, a story. "
-                "Find Sam or Matt, or open the site and read the last section.", small,
-             PAD, yq - 32, W - 2 * PAD)
+        y = yq - 22
+    if extra:
+        c.setDash(2, 2)
+        c.setLineWidth(0.6)
+        c.line(PAD, y - 10, W - PAD, y - 10)
+        c.setDash()
+        y = work_block(c, extra, y - 20, 0.7 * inch)
+    else:
+        y = para(c, "Want to put something in the next one? An app, a song, a painting, a story. "
+                    "Find Sam or Matt, or open the site and read the last section.", small,
+                 PAD, yq - 32, W - 2 * PAD)
+    if y < PAD + 26 and not copy:
+        print(f"warning: page 8 overflows by {PAD + 26 - y:.0f}pt")
     c.setLineWidth(1.6)
     c.line(PAD, PAD + 20, W - PAD, PAD + 20)
     label(c, "FOLD IT · CUT IT · LEAVE IT SOMEWHERE", PAD, PAD + 8, size=5.9, spacing=0.6)
 
 
-PANELS = {
-    1: p_cover, 2: p_intro,
-    3: p_works(["ambit"], 3, big=True, qr=1.1 * inch),
-    4: p_works(["townies"], 4, big=True, qr=1.3 * inch),
-    5: p_works(["demovoyager", "septic-tankz"], 5),
-    6: p_works(["solstice", "topple-house"], 6),
-    7: p_works(["brick-ninja", "bell-weather"], 7),
-    8: p_back,
-}
+# Pages 3-7 take the issue's first ten works in pairs; page 2 takes the 11th, the back cover the 12th.
+_pairs = [ISSUE["works"][k:k + 2] for k in range(0, min(10, len(ISSUE["works"])), 2)]
+PANELS = {1: p_cover, 2: p_intro, 8: p_back}
+for _n, _ids in zip(range(3, 8), _pairs):
+    PANELS[_n] = p_works(_ids, _n)
+for _n in range(3, 8):
+    PANELS.setdefault(_n, lambda c, copy, run, _n=_n: folio(c, _n))
 LAYOUT = [[5, 4, 3, 2],  # top row, drawn upside down
           [6, 7, 8, 1]]  # bottom row
 

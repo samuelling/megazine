@@ -14,6 +14,9 @@ Each issue is one sheet of paper folded into an 8-page mini-zine. Every code on 
 | `print/issue-01-numbered.pdf` | 50 numbered copies, each with its own back-cover code. |
 | `tools/make_sheet.py` | Regenerates the PDFs from `works.json`. |
 | `tools/build.py` | Regenerates `index.html` from `tools/page.html`. |
+| `media/` | Images for works (paintings, screenshots). |
+| `CLAUDE.md` | Instructions Claude follows when working in this repo. |
+| `MATT.md` | How Matt (or anyone) adds work by talking to Claude. |
 
 ## Put it online (once)
 
@@ -30,10 +33,11 @@ Add an entry to `works` in `works.json`:
 {
   "id": "short-id",
   "title": "Name",
-  "kind": "game | sound | tool | toy | art | story | painting | music",
+  "kind": "game | sound | music | tool | toy | art | painting | story",
   "made": "hands | claude | both",
   "makers": ["Matt"],
   "platform": "Web",
+  "image": "media/short-id.jpg",
   "blurb": "Two or three plain sentences. The paper uses the first one.",
   "links": [
     { "label": "Play", "url": "https://..." },
@@ -44,12 +48,14 @@ Add an entry to `works` in `works.json`:
 
 A link with `"url": null` shows as a dashed "coming" button. Fill the URL in later and every printed code for it starts working, no reprint needed.
 
-To feature it in an issue, add its `id` to that issue's `works` list. Anything not in the latest issue shows up in **The stacks**.
+`makers` and `made` print the gold seal: "MADE BY MATT · BY HAND". `image` is optional (paintings). Add `"status": "workshop"` with no links to list something as still being built.
+
+To feature it in an issue, add its `id` to that issue's `works` list (the paper fits 12). Workshop items show up under **In the workshop**.
 
 ## Links the site understands
 
 - `/?go=townies` jumps straight to that work's first live link (this is what the paper codes use). If the work has no live link yet, it shows its card instead.
-- `/?copy=37` shows "You're holding copy 37 of 50" plus that copy's B-side, picked from the stacks by copy number.
+- `/?copy=37` shows "You're holding copy 37 of 50" plus a starting point picked from the issue by copy number.
 - `/?w=townies` scrolls to and highlights a card.
 
 ## Make the paper
@@ -72,5 +78,4 @@ Print single-sided on letter paper, landscape, at 100% (no "fit to page"). Black
 
 - `ambit` → App Store URL once Ambit: Quartet clears review.
 - `townies` → TestFlight public link for (Water) Townies.
-- `big-apple-sam` → Pages URL once it's deployed.
-- Matt's work: paintings, his iOS app, anything.
+- Matt's work: paintings, his iOS app, anything (see `MATT.md`).

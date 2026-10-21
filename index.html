@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Courier+Prime:wght@400;700&family=Spline+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: a photocopied masthead, then a pinboard of clippings (the issue), then a plain list (the stacks). Two-colour riso: toner + blue, with fluoro pink reserved for misregistration and the copy stamp. */
+/* Layout: a photocopied masthead, then a pinboard of clippings (the issue), then a plain list (the workshop). Two-colour riso: toner + blue, with fluoro pink reserved for misregistration and the copy stamp. */
 :root {
   --paper: #ECEDE9;
   --sheet: #F8F8F5;
@@ -23,6 +23,8 @@
   --display: "Bowlby One SC", "Arial Black", Impact, sans-serif;
   --body: "Spline Sans", "Helvetica Neue", Arial, sans-serif;
   --type: "Courier Prime", "Courier New", Courier, monospace;
+  /* the seal is a gold foil sticker in both themes */
+  --gold-hi: #F8E39A; --gold: #D8A83A; --gold-lo: #94671A; --gold-ink: #3F2A06;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -152,14 +154,20 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-
 }
 .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
 .kind { font: 700 .72rem/1 var(--type); letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
-.made {
-  font: 700 .68rem/1 var(--type); letter-spacing: .08em; text-transform: uppercase;
-  border: 1.5px solid currentColor; padding: 4px 6px; color: var(--muted);
-  transform: rotate(1.5deg);
+/* Seal: who made it, and how. Stuck on the clipping's corner. */
+.seal { display: block; width: 86px; height: 86px; transform: rotate(var(--seal-rot, 9deg)); filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .3)); }
+.clip .seal { position: absolute; top: -20px; right: -14px; z-index: 1; }
+.clip .meta, .clip h3 { padding-right: 70px; }
+.seal text { font-family: var(--type); font-weight: 700; fill: var(--gold-ink); }
+.seal .name { font-family: var(--display); }
+@media (prefers-reduced-motion: no-preference) {
+  .clip:hover .seal { transform: rotate(calc(var(--seal-rot, 9deg) - 14deg)); transition: transform .3s ease; }
 }
 .clip h3 { font: 400 1.55rem/1.05 var(--display); margin: 2px 0 0; text-wrap: balance; overflow-wrap: anywhere; }
 .plat { font: 400 .8rem/1.3 var(--type); color: var(--muted); margin: 0; }
 .clip p.blurb { margin: 0; font-size: .96rem; }
+.clip .art { display: block; width: 100%; max-width: 100%; height: auto; border: 1px solid var(--rule); }
+main { overflow-x: clip; }
 .credit { font: 400 .8rem/1.4 var(--type); color: var(--muted); margin: 0; }
 .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 6px; }
 .btn {
@@ -182,6 +190,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-
 .stacks .d { margin: 0; font-size: .93rem; min-width: 0; }
 .stacks .d .credit { display: block; margin-top: 2px; }
 .stacks .l { display: flex; gap: 8px; flex-wrap: wrap; }
+.stacks .l:empty { display: none; }
+.stacks li:has(.l:empty) { grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); }
 @media (max-width: 640px) {
   .stacks li { grid-template-columns: minmax(0, 1fr); }
 }
@@ -190,7 +200,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-
 .submit { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px 32px; padding-block: 10px 30px; }
 .submit h3 { font: 700 .8rem/1 var(--type); letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin: 0 0 8px; }
 .submit p { margin: 0; max-width: 46ch; }
-.legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 12px; }
 footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400 .85rem/1.5 var(--type); color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 .err { font: 400 .95rem/1.5 var(--type); color: var(--muted); padding-block: 20px; }
 
@@ -217,6 +227,18 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
   <div id="stamp" class="stamp" hidden></div>
 </header>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="seal-gold" cx="38%" cy="32%" r="78%">
+      <stop offset="0" stop-color="var(--gold-hi)"/>
+      <stop offset=".55" stop-color="var(--gold)"/>
+      <stop offset="1" stop-color="var(--gold-lo)"/>
+    </radialGradient>
+    <path id="seal-top" d="M -33 0 A 33 33 0 0 1 33 0"/>
+    <path id="seal-bot" d="M -39.5 0 A 39.5 39.5 0 0 0 39.5 0"/>
+  </defs>
+</svg>
+
 <main>
   <section class="wrap" aria-labelledby="issue-h">
     <div class="sect">
@@ -227,10 +249,10 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
     <div class="board" id="board"><p class="err">Loading the issue…</p></div>
   </section>
 
-  <section class="wrap" aria-labelledby="stacks-h">
+  <section class="wrap" aria-labelledby="stacks-h" id="stacks-sect">
     <div class="sect">
-      <h2 id="stacks-h">The stacks</h2>
-      <p>Everything else we've made, newest issue first.</p>
+      <h2 id="stacks-h">In the workshop</h2>
+      <p>Still being built. Not out yet.</p>
     </div>
     <ul class="stacks" id="stacks"></ul>
   </section>
@@ -243,9 +265,9 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
         <p>An app that does nothing useful. A tool that does one thing well. A song, a painting, a short story, a screensaver. Send it to Sam or Matt and it may end up in the next sheet.</p>
       </div>
       <div>
-        <h3>Say how it was made</h3>
-        <p>Every piece carries a stamp. It is the one rule here.</p>
-        <div class="legend"><span class="made">Made by hand</span><span class="made">Made by Claude</span><span class="made">Hands + Claude</span></div>
+        <h3>Get your seal</h3>
+        <p>Every piece gets a gold seal saying who made it and how. It is the one rule here.</p>
+        <div class="legend" id="legend"></div>
       </div>
       <div>
         <h3>Paper first</h3>
@@ -264,6 +286,33 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
 (function () {
   const KINDS = { game: "Game", sound: "Sound", tool: "Tool", toy: "Toy", art: "Art", story: "Story", painting: "Painting", music: "Music" };
   const MADE = { hands: "Made by hand", claude: "Made by Claude", both: "Hands + Claude" };
+  const SEAL_HOW = { hands: "BY HAND", claude: "BY CLAUDE", both: "HANDS + CLAUDE" };
+
+  // Gold starburst seal: "megaZINE seal" over the top, maker in the middle, how it was made underneath.
+  const BURST = (() => {
+    const pts = [], n = 36;
+    for (let i = 0; i < n * 2; i++) {
+      const r = i % 2 ? 45 : 49.5, a = (Math.PI * i) / n - Math.PI / 2;
+      pts.push((r * Math.cos(a)).toFixed(2) + "," + (r * Math.sin(a)).toFixed(2));
+    }
+    return pts.join(" ");
+  })();
+  function sealSVG(w, i) {
+    const who = (w.seal || (w.makers || []).join(" & ") || "?").toUpperCase();
+    const how = SEAL_HOW[w.made] || String(w.made || "").toUpperCase();
+    const fs = who.length <= 4 ? 19 : who.length <= 7 ? 14 : who.length <= 11 ? 10 : 8;
+    const rot = [9, -7, 13, -11, 5, -4][(i || 0) % 6];
+    return `<svg class="seal" viewBox="-50 -50 100 100" style="--seal-rot:${rot}deg" role="img" aria-label="Seal: made by ${esc(who.toLowerCase())}, ${esc(how.toLowerCase())}">
+      <polygon points="${BURST}" fill="url(#seal-gold)" stroke="var(--gold-lo)" stroke-width=".8"/>
+      <circle r="42.5" fill="none" stroke="var(--gold-ink)" stroke-width="1" opacity=".55"/>
+      <circle r="29" fill="none" stroke="var(--gold-ink)" stroke-width="1.1" opacity=".7"/>
+      <text font-size="7.6" letter-spacing="1.1"><textPath href="#seal-top" startOffset="50%" text-anchor="middle">MEGAZINE SEAL</textPath></text>
+      <text font-size="6.4" letter-spacing=".6"><textPath href="#seal-bot" startOffset="50%" text-anchor="middle">${esc(how)}</textPath></text>
+      <text x="-37" y="2.6" font-size="7" text-anchor="middle">★</text><text x="37" y="2.6" font-size="7" text-anchor="middle">★</text>
+      <text class="name" y="-4.5" font-size="5.6" text-anchor="middle" letter-spacing=".8">MADE BY</text>
+      <text class="name" y="${(fs * 0.36 + 5).toFixed(1)}" font-size="${fs}" text-anchor="middle">${esc(who)}</text>
+    </svg>`;
+  }
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -279,10 +328,10 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
     if (!l.url) return `<span class="btn pending" title="${esc(l.status || "Coming soon")}">${esc(l.label)} · ${esc(l.status || "soon")}</span>`;
     return `<a class="btn${primary ? " primary" : ""}" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`;
   }
-  function creditHTML(w) {
+  function creditHTML(w, withMakers) {
     const bits = [];
     if (w.idea) bits.push("Idea: " + esc(w.idea));
-    if (w.makers && w.makers.length) bits.push("Made by " + w.makers.map(esc).join(" & "));
+    if (withMakers && w.makers && w.makers.length) bits.push("Made by " + w.makers.map(esc).join(" & "));
     return bits.length ? `<p class="credit">${bits.join(" · ")}</p>` : "";
   }
 
@@ -303,15 +352,15 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
     const issued = new Set(inIssue.map((w) => w.id));
     const rest = data.works.filter((w) => !issued.has(w.id));
 
-    // Copy stamp, with a B-side picked by copy number.
+    // Copy stamp, with a starting point picked by copy number.
     if (copy) {
       const n = parseInt(copy, 10);
       const run = data.zine.print_run || "?";
-      const live = rest.filter((w) => (w.links || []).some((l) => l.url));
+      const live = inIssue.filter((w) => (w.links || []).some((l) => l.url));
       const b = live.length ? live[(n - 1) % live.length] : null;
       const bl = b && b.links.find((l) => l.url);
       $("stamp").innerHTML = `<span>You're holding copy ${n} of ${run}.</span>` +
-        (b ? `<span>Its B-side: <a href="${esc(bl.url)}" target="_blank" rel="noopener">${esc(b.title)} ↗</a></span>` : "");
+        (b ? `<span>Copy ${n} starts with <a href="${esc(bl.url)}" target="_blank" rel="noopener">${esc(b.title)} ↗</a></span>` : "");
       $("stamp").hidden = false;
     }
 
@@ -333,9 +382,11 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
         const tilt = [-.7, .5, -.3, .8, -.5, .3][i % 6];
         const tape = [-4, 3, -2, 5, -3, 2][i % 6];
         return `<article class="clip${w.id === focusId ? " hit" : ""}" id="${esc(w.id)}" style="--tilt:${tilt}deg;--tape:${tape}deg">
-          <div class="meta"><span class="kind">${esc(KINDS[w.kind] || w.kind)}</span><span class="made">${esc(MADE[w.made] || w.made)}</span></div>
+          ${sealSVG(w, i)}
+          <div class="meta"><span class="kind">${esc(KINDS[w.kind] || w.kind)}</span></div>
           <h3>${esc(w.title)}</h3>
           ${w.platform ? `<p class="plat">${esc(w.platform)}</p>` : ""}
+          ${w.image ? `<img class="art" src="${esc(w.image)}" alt="${esc(w.title)}" loading="lazy">` : ""}
           <p class="blurb">${esc(w.blurb)}</p>
           ${creditHTML(w)}
           <div class="links">${(w.links || []).map((l, j) => linkHTML(l, j === 0)).join("")}</div>
@@ -344,9 +395,12 @@ footer { border-top: 2px solid var(--toner); padding-block: 18px 36px; font: 400
     }
     drawBoard();
 
+    $("legend").innerHTML = ["hands", "claude", "both"].map((m, j) => sealSVG({ seal: "You", made: m }, j)).join("");
+
+    $("stacks-sect").hidden = !rest.length;
     $("stacks").innerHTML = rest.map((w) => `<li id="${esc(w.id)}">
         <span class="t">${esc(w.title)}</span>
-        <p class="d">${esc(w.blurb)}${creditHTML(w).replace("<p", "<span").replace("</p>", "</span>")}</p>
+        <p class="d">${esc(w.blurb)}${creditHTML(w, true).replace("<p", "<span").replace("</p>", "</span>")}</p>
         <span class="l">${(w.links || []).map((l) => linkHTML(l, false)).join("")}</span>
       </li>`).join("");
 
