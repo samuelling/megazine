@@ -66,6 +66,10 @@ python3 tools/make_sheet.py            # only if the current issue's lineup or t
 - The current issue's cards are shuffled on every visit; the order in `issues[-1].works` only matters for the paper.
 - Visits, paper scans (`/scan/<id>`, `/scan/copy-<n>`) and clicks out (`/click/<id>`) are counted in GoatCounter under the code in `zine.goatcounter`. Don't add other trackers or cookies.
 
+## Keep the docs in step
+
+`MATT.md` is the guide Matt follows to work with this repo through Claude, and `README.md` is the reference for both editors. Whenever a change alters how things work (new or renamed fields in `works.json`, new sections or behaviour on the site, paper capacity or layout rules, build steps, stats, access), update `MATT.md` and `README.md` in the same commit. Content-only changes (adding or editing a work) don't need it.
+
 ## Voice
 
 Plain, dry, short. No hype, no "revolutionary". Blurbs describe what the thing does, in present tense, as a person would tell a friend.
